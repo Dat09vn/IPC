@@ -34,4 +34,15 @@ Process group is a collection of one or more processes. A process group constitu
 Job control: This permits a shell user to simultaneously execute multiple commands (or jobs), one in the foreground and all remaining in the background. It is also possible to move the jobs from the foreground to the background and vice-versa.
 It is also possible to terminate the process either with CTRL+C or kill command. 
 
-Example: To stop the current running process, you need to enter CTRL+Z. This gives you a job number. The job can be resumed either in the foreground or the background: command fg, bg, fg % 1, fg % 2
+Example: To stop the current running process, you need to enter CTRL+Z. This gives you a job number. The job can be resumed either in the foreground or the background: command
+
+- show all jobs list: jobs
+- run foreground of last stoped process: fg
+- run background of last stoped process: bg
+- specific process: fg % 1, fg % 2
+
+**6.** Other process
+
+- Orphan Process: In real systems, when the parent process exits before the child process, the child process is "adopted" by the init process (with PID 1 in Linux), which becomes its new parent. This situation is known as an orphaned process.
+- Zombie Process: A zombie process is a process that has completed execution (via exit()), but still has an entry in the process table. This happens when the parent process hasn't yet read the exit status of the child process using a system call like wait() or waitpid(). In this state, the process is "dead" but still occupying an entry in the system's process table, hence the term "zombie."
+- Daemon Process: A daemon process is a background process that runs independently of the controlling terminal and often provides system or application-level services. These processes are typically started during system boot or run continuously in the background without user interaction, performing essential system tasks such as handling requests for services, monitoring system events, or performing scheduled tasks.
