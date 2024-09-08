@@ -65,3 +65,12 @@ Types:
 - Device Management: E.g., ioctl()
 - Information Maintenance: E.g., getpid(), alarm()
 - Communication: E.g., pipe(),shmctl(), msgget(), socket()
+
+**9.** System V and POSIX are two important standards related to Unix-based operating systems. They define different ways of interacting with the system, with POSIX being a more general, widely-adopted standard, and System V representing an earlier Unix lineage.
+
+System V is an early Unix version that influenced many commercial Unix systems and is known for its init system, IPC mechanisms, and other Unix features.
+
+POSIX is a standard designed to ensure portability across Unix-like systems by defining a standard API for **system calls, IPC, threads,** and other functionalities.
+
+If you are writing code meant to run on a wide variety of Unix-based systems, you'll generally prefer using POSIX functions, as they offer broader portability than System V-specific features.
+
