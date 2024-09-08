@@ -52,3 +52,16 @@ Example: To stop the current running process, you need to enter CTRL+Z. This giv
 We are running a program and we want to run another program from the current program. If so, the second program will overlay the current program and current program will not continue execute. 
 
 --> Solution: Create a child process, so that we have a parent process and a newly created child process. Already we are running the current program in the parent process, so run the newly created process in the child. (current program is still running in parent process, second program will run in child process.
+
+**8.** A system call is a mechanism used by an application to request services from the operating system (OS). It acts as a bridge between user-mode applications and the kernel, allowing programs to access low-level functions such as hardware manipulation, file system operations, or process control.
+
+Key points about system calls:
+- Kernel Interaction: System calls allow user programs to communicate with the OS kernel, which operates in privileged mode.
+- Functionality: They provide various services like file operations (open, read, write), process management (fork, exec), memory allocation (mmap), and communication (socket).
+
+Types:
+- Process Control: E.g., fork(), exec(), exit()
+- File Operations: E.g., open(), read(), write()
+- Device Management: E.g., ioctl()
+- Information Maintenance: E.g., getpid(), alarm()
+- Communication: E.g., pipe(),shmctl(), msgget(), socket()
