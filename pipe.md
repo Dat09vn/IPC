@@ -1,7 +1,7 @@
 Pipe is a communication medium between two or more related or interrelated processes.
-
 Communication is achieved by one process writing into the pipe and other reading from the pipe.
 
+**1.**
 int pipe(int pipedes[2]);
 
 This system call would create a pipe for one-way communication i.e., it creates two descriptors, first one is connected to read from the pipe and other one is connected to write into the pipe.
@@ -14,10 +14,12 @@ A file descriptor is an integer that uniquely identifies an open file or other I
 
 2: Standard Error (stderr).
 
+**2.**
 ssize_t read(int fd, void *buf, size_t count)
 
 The above system call is to read from the specified file with arguments of file descriptor fd, proper buffer with allocated memory (either static or dynamic) and the size of buffer.
 
+**3.**
 ssize_t write(int fd, void *buf, size_t count)
 
 The above system call is to write to the specified file with arguments of the file descriptor fd, a proper buffer with allocated memory (either static or dynamic) and the size of buffer.
