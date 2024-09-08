@@ -46,3 +46,9 @@ Example: To stop the current running process, you need to enter CTRL+Z. This giv
 - Orphan Process: In real systems, when the parent process exits before the child process, the child process is "adopted" by the init process (with PID 1 in Linux), which becomes its new parent. This situation is known as an orphaned process.
 - Zombie Process: A zombie process is a process that has completed execution (via exit()), but still has an entry in the process table. This happens when the parent process hasn't yet read the exit status of the child process using a system call like wait() or waitpid(). In this state, the process is "dead" but still occupying an entry in the system's process table, hence the term "zombie."
 - Daemon Process: A daemon process is a background process that runs independently of the controlling terminal and often provides system or application-level services. These processes are typically started during system boot or run continuously in the background without user interaction, performing essential system tasks such as handling requests for services, monitoring system events, or performing scheduled tasks. A daemon is used when you need a process to run in the background and perform tasks without user interaction. Daemons are typically employed to provide system or application services, monitor system events, or perform periodic tasks. https://notes.shichao.io/apue/ch13/
+
+**7.** Overlaying Process Image
+
+We are running a program and we want to run another program from the current program. If so, the second program will overlay the current program and current program will not continue execute. 
+
+--> Solution: Create a child process, so that we have a parent process and a newly created child process. Already we are running the current program in the parent process, so run the newly created process in the child. (current program is still running in parent process, second program will run in child process.
