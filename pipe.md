@@ -1,4 +1,5 @@
-Pipe is a communication medium between two or more related or interrelated processes.
+Pipe is a communication medium between two or more related or interrelated processes. eg: parent and child process
+
 Communication is achieved by one process writing into the pipe and other reading from the pipe.
 
 **1.**
