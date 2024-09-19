@@ -126,3 +126,5 @@ Think of a counting semaphore like a group of parking spaces (e.g., 3 spaces). W
 **Different between semaphore and mutex:**
 
 ![image](https://github.com/user-attachments/assets/fd6a3b29-149c-49e0-ae27-fb3ed59bb6d9)
+
+**Using semaphore when 2 process try to write in shared memory at the same time.**
