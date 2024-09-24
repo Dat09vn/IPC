@@ -148,20 +148,33 @@ Streaming ZIP: A convenient way to work with ZIP files as streams rather than ne
 The Poco Net library provides a rich set of classes for network programming in C++, including support for protocols like HTTP, TCP, UDP, and more. These classes make it easier to build network-enabled applications without handling the low-level details of socket programming directly.
 
 **1. TCP Communication**
-- Poco::Net::StreamSocket: Represents a TCP socket for connection-based communication.
-- Example usage: Create a TCP client or server.
-- Poco::Net::ServerSocket: Used to create a TCP server that listens for incoming connections.
+
+Provides classes to implement TCP-based communication for both client and server applications.
+
+- Poco::Net::StreamSocket: Used for creating and managing TCP connections.
+- Poco::Net::ServerSocket: Listens for incoming connections on a TCP port.
+- Poco::Net::SocketReactor: Supports non-blocking, event-driven socket communication (ideal for high-performance applications).
+- Poco::Net::SocketAcceptor: Manages multiple client connections in a server.
 
 **2. HTTP Client and Server**
 
 - Poco::Net::HTTPClientSession: Used to create an HTTP client to send HTTP requests and receive responses.
 - Poco::Net::HTTPRequest and Poco::Net::HTTPResponse: Represent the request and response in an HTTP transaction.
 - Poco::Net::HTTPServer: Allows you to build an HTTP server.
+- Poco::Net::HTTPRequestHandler: Handles individual HTTP requests.
+- Poco::Net::HTTPServerRequest and Poco::Net::HTTPServerResponse: Encapsulate an HTTP request and response.
 
 **3. UDP Communication**
 
+Provides classes for User Datagram Protocol (UDP), suitable for connectionless communication where low latency is more important than reliability.
 - Poco::Net::DatagramSocket: Represents a UDP socket for connectionless communication.
 - Example usage: Create a UDP client or server.
+
+**5. WebSocket Support**
+
+Enables real-time, full-duplex communication over WebSocket connections.
+- Poco::Net::WebSocket: Manages WebSocket connections for sending and receiving messages.
+- Poco::Net::HTTPRequest and Poco::Net::HTTPResponse: Used to establish the WebSocket connection.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 **5. Event-Driven Programming**
