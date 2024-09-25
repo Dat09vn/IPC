@@ -96,58 +96,76 @@ Here’s what you can learn and explore with Poco:
 **13. Build and Deployment**
 - Cross-Platform C++ Development: Master building and deploying Poco applications across different operating systems using CMake.
 - CI/CD Integration: Learn to integrate Poco with Continuous Integration/Continuous Deployment (CI/CD) pipelines for automated building and testing.
+- 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**1. Foundation**
+- Basic Utilities: Provides a range of common utilities like memory management, smart pointers, logging, time/date handling, and file system access.
+- Threads: Offers thread management, synchronization primitives (mutexes, conditions), and thread pools for multithreading support.
+- Event Handling: Allows creating event-driven applications, supporting the Observer pattern.
 
+**2. Net**
+- Networking Protocols: Supports TCP/IP, UDP, and HTTP(S) clients and servers.
+- WebSocket: Implements WebSocket support for real-time communication.
+- HTTP Clients/Servers: Allows easy handling of HTTP requests/responses, suitable for building RESTful services or other HTTP-based applications.
 
-1. Foundation
-Basic Utilities: Provides a range of common utilities like memory management, smart pointers, logging, time/date handling, and file system access.
-Threads: Offers thread management, synchronization primitives (mutexes, conditions), and thread pools for multithreading support.
-Event Handling: Allows creating event-driven applications, supporting the Observer pattern.
-2. Net
-Networking Protocols: Supports TCP/IP, UDP, and HTTP(S) clients and servers.
-WebSocket: Implements WebSocket support for real-time communication.
-HTTP Clients/Servers: Allows easy handling of HTTP requests/responses, suitable for building RESTful services or other HTTP-based applications.
-3. NetSSL
-Secure Networking: Extends the Net library by adding support for SSL (Secure Sockets Layer), allowing secure communication over HTTPS and SSL sockets.
-4. Util
-Configuration Management: Provides easy access to configuration files, environment variables, and command-line arguments.
-Application Management: Tools for handling applications, daemons, and services, such as logging, error handling, and resource management.
-JSON Parsing: Handles reading/writing JSON data.
-5. XML
-XML Parsing: Provides support for reading, writing, and manipulating XML documents using DOM (Document Object Model) and SAX (Simple API for XML) parsers.
-6. JSON
-JSON Parsing: Provides an API for working with JSON documents, including parsing, manipulating, and generating JSON data.
-7. Data
-Database Abstraction: A set of classes to abstract access to relational databases (such as SQLite, MySQL, PostgreSQL, ODBC).
-ORM (Object Relational Mapping): Allows developers to work with databases in a more object-oriented way.
-8. Data/ODBC
-ODBC (Open Database Connectivity): Offers access to databases via ODBC.
-9. Data/SQLite
-SQLite: Provides a lightweight, serverless SQL database implementation.
-10. Crypto
-Cryptographic Functions: Supports cryptography algorithms, hashing, message digests (MD5, SHA-1, etc.), digital signatures, and encryption/decryption (RSA, AES).
-Key Management: Functions for handling public/private key pairs and certificates.
-11. Zip
-ZIP File Handling: Read/write functionality for ZIP files, allowing you to compress and extract data.
-12. PDF
-PDF Creation: Simple API for generating PDF documents, though limited compared to specialized PDF libraries.
-13. JWT (JSON Web Tokens)
-Token Management: Provides mechanisms to encode, decode, and verify JWTs used in modern authentication schemes.
-14. CppParser
-C++ Parsing: Utility to parse C++ source code, useful for code analysis tools.
-15. MongoDB
-MongoDB Access: Provides support for interacting with MongoDB, a NoSQL database.
-16. Prometheus
-Metrics Exporting: Allows integration with Prometheus to export metrics for monitoring.
-17. Redis
-Redis Client: Support for interacting with Redis, an in-memory key-value store.
-18. ZipStream
-Streaming ZIP: A convenient way to work with ZIP files as streams rather than needing to read/write entire archives at once.
+**3. NetSSL**
+- Secure Networking: Extends the Net library by adding support for SSL (Secure Sockets Layer), allowing secure communication over HTTPS and SSL sockets.
+
+**4. Util**
+- Configuration Management: Provides easy access to configuration files, environment variables, and command-line arguments.
+- Application Management: Tools for handling applications, daemons, and services, such as logging, error handling, and resource management.
+- JSON Parsing: Handles reading/writing JSON data.
+
+**5. XML**
+- XML Parsing: Provides support for reading, writing, and manipulating XML documents using DOM (Document Object Model) and SAX (Simple API for XML) parsers.
+
+**6. JSON**
+- JSON Parsing: Provides an API for working with JSON documents, including parsing, manipulating, and generating JSON data.
+
+**7. Data**
+- Database Abstraction: A set of classes to abstract access to relational databases (such as SQLite, MySQL, PostgreSQL, ODBC).
+- ORM (Object Relational Mapping): Allows developers to work with databases in a more object-oriented way.
+
+**8. Data/ODBC**
+- ODBC (Open Database Connectivity): Offers access to databases via ODBC.
+
+**9. Data/SQLite**
+- SQLite: Provides a lightweight, serverless SQL database implementation.
+
+**10. Crypto**
+- Cryptographic Functions: Supports cryptography algorithms, hashing, message digests (MD5, SHA-1, etc.), digital signatures, and encryption/decryption (RSA, AES).
+- Key Management: Functions for handling public/private key pairs and certificates.
+
+**11. Zip**
+- ZIP File Handling: Read/write functionality for ZIP files, allowing you to compress and extract data.
+
+**12. PDF**
+- PDF Creation: Simple API for generating PDF documents, though limited compared to specialized PDF libraries.
+
+**13. JWT (JSON Web Tokens)**
+- Token Management: Provides mechanisms to encode, decode, and verify JWTs used in modern authentication schemes.
+
+**14. CppParser**
+- C++ Parsing: Utility to parse C++ source code, useful for code analysis tools.
+- 
+**15. MongoDB**
+- MongoDB Access: Provides support for interacting with MongoDB, a NoSQL database.
+
+**16. Prometheus**
+- Metrics Exporting: Allows integration with Prometheus to export metrics for monitoring.
+
+**17. Redis**
+- Redis Client: Support for interacting with Redis, an in-memory key-value store.
+
+**18. ZipStream**
+- Streaming ZIP: A convenient way to work with ZIP files as streams rather than needing to read/write entire archives at once.
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **1. Networking**
 
 The Poco Net library provides a rich set of classes for network programming in C++, including support for protocols like HTTP, TCP, UDP, and more. These classes make it easier to build network-enabled applications without handling the low-level details of socket programming directly.
 
-**1. TCP Communication**
+**a. TCP Communication**
 
 Provides classes to implement TCP-based communication for both client and server applications.
 
@@ -156,7 +174,7 @@ Provides classes to implement TCP-based communication for both client and server
 - Poco::Net::SocketReactor: Supports non-blocking, event-driven socket communication (ideal for high-performance applications).
 - Poco::Net::SocketAcceptor: Manages multiple client connections in a server.
 
-**2. HTTP Client and Server**
+**b. HTTP Client and Server**
 
 - Poco::Net::HTTPClientSession: Used to create an HTTP client to send HTTP requests and receive responses.
 - Poco::Net::HTTPRequest and Poco::Net::HTTPResponse: Represent the request and response in an HTTP transaction.
@@ -164,13 +182,13 @@ Provides classes to implement TCP-based communication for both client and server
 - Poco::Net::HTTPRequestHandler: Handles individual HTTP requests.
 - Poco::Net::HTTPServerRequest and Poco::Net::HTTPServerResponse: Encapsulate an HTTP request and response.
 
-**3. UDP Communication**
+**c. UDP Communication**
 
 Provides classes for User Datagram Protocol (UDP), suitable for connectionless communication where low latency is more important than reliability.
 - Poco::Net::DatagramSocket: Represents a UDP socket for connectionless communication.
 - Example usage: Create a UDP client or server.
 
-**5. WebSocket Support**
+**d. WebSocket Support**
 
 Enables real-time, full-duplex communication over WebSocket connections.
 - Poco::Net::WebSocket: Manages WebSocket connections for sending and receiving messages.
@@ -181,7 +199,7 @@ Enables real-time, full-duplex communication over WebSocket connections.
 
 Poco’s event-driven architecture is a powerful tool for designing responsive and efficient C++ applications, especially for managing asynchronous tasks, inter-component communication, and creating modular systems with minimal coupling. Here’s how you can leverage Poco's Event Handling and Notification Center:
 
-**1. Event Handling in Poco**
+**a. Event Handling in Poco**
 
 Poco provides various utilities that allow you to implement event-driven programming using techniques like the Observer pattern, where objects can subscribe to or observe events and react to them asynchronously.
 
@@ -191,7 +209,7 @@ Key Components:
 - Poco::Observer: Binds the event to a callback function of the observer object.
 - Basic Example: Event and Observer Pattern
 
-**2. Notification Center**
+**b. Notification Center**
 
 The Notification Center in Poco is designed for managing messages and events between different components of an application in a decoupled fashion. It works as a hub for sending and receiving notifications.
 
