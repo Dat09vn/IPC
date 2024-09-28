@@ -118,7 +118,7 @@ int main(int argc, char** argv)
 
 
 The Program for local socket using Poco lib:
-```c++:
+```c++
 //Server:
 #include "Poco/Net/ServerSocket.h"
 #include "Poco/Net/StreamSocket.h"
