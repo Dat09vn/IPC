@@ -51,7 +51,7 @@ int main(int argc, char** argv)
     return 0;
 }
 ```
-**2. Socket**
+**2. TCP Socket**
 
 POCO sockets are a very thin layer on top of BSD sockets and thus incur a minimal performance overhead – basically an additional call to a (virtual) function.
 
@@ -160,3 +160,132 @@ int main(int argc, char** argv)
 }
 ```
 
+**3 . UDP Socket**
+- Poco::Net::DatagramSocket is used to send and receive UDP packets.
+- Poco::Net::MulticastSocket is a subclass of
+- Poco::Net::DatagramSocket that allows you to send multicast datagrams.
+- To receive multicast messages, you must join a multicast group, using MulticastSocket::joinGroup().
+
+```c++
+// DatagramSocket send example
+#include "Poco/Net/DatagramSocket.h"
+#include "Poco/Net/SocketAddress.h"
+#include "Poco/Timestamp.h"
+#include "Poco/DateTimeFormatter.h"
+int main(int argc, char** argv)
+{
+    Poco::Net::SocketAddress sa("localhost", 514);
+    Poco::Net::DatagramSocket dgs;
+    dgs.connect(sa);
+    Poco::Timestamp now;
+    std::string msg = Poco::DateTimeFormatter::format(now, "<14>%w %f %H:%M:%S Hello, world!");
+    dgs.sendBytes(msg.data(), msg.size());
+    return 0;
+}
+
+// DatagramSocket receive example
+#include "Poco/Net/DatagramSocket.h"
+#include "Poco/Net/SocketAddress.h"
+#include <iostream>
+int main(int argc, char** argv)
+{
+    Poco::Net::SocketAddress sa(Poco::Net::IPAddress(), 514);
+    Poco::Net::DatagramSocket dgs(sa);
+    char buffer[1024];
+    for (;;)
+    {
+        Poco::Net::SocketAddress sender;
+        int n = dgs.receiveFrom(buffer, sizeof(buffer)-1, sender);
+        buffer[n] = '\0';
+        std::cout << sender.toString() << ": " << buffer << std::endl;
+    }
+    return 0;
+}
+```
+**4 .Multithread connection TCP**
+
+Poco::Net::TCPServer implements a multithreaded TCP server. The server uses a ServerSocket to accept incoming connections.
+- You must put the ServerSocket into listening mode before passing it to the TCPServer.
+- The server maintains a queue for incoming connections.
+- A variable number of worker threads fetches connections from the queue to process them. The number of worker threads is adjusted automatically, depending on the number of connections waiting in the queue.
+- The number of connections in the queue can be limited to prevent the server from being flooded with requests. Incoming connections that no longer fit into the queue  are closed immediately.
+- TCPServer creates its own thread that accepts connections and places them in the queue.
+- TCPServer uses TCPServerConnection objects to handle a connection. You must create your own subclass of TCPServerConnection, as well as a factory for it. The factory object is passed to the constructor of TCPServer.
+- Your subclass of TCPServerConnection must override the run() method. In the run() method, you handle the connection.
+- When run() returns, the TCPServerConnection object will be deleted, and the connection closed.
+- A new TCPServerConnection will be created for every accepted
+connection.
+
+```c++
+#include "Poco/Net/TCPServer.h"
+#include "Poco/Net/ServerSocket.h"
+#include "Poco/Net/TCPServerConnection.h"
+#include "Poco/Net/TCPServerConnectionFactory.h"
+#include "Poco/ThreadPool.h"
+#include <iostream>
+
+// Custom TCPServerConnection class
+class MyTCPConnection : public Poco::Net::TCPServerConnection
+{
+public:
+    MyTCPConnection(const Poco::Net::StreamSocket& socket)
+        : Poco::Net::TCPServerConnection(socket)
+    {
+    }
+
+    void run() override
+    {
+        Poco::Net::StreamSocket& socket = this->socket();
+        char buffer[256];
+        int n;
+        try
+        {
+            while ((n = socket.receiveBytes(buffer, sizeof(buffer))) > 0)
+            {
+                socket.sendBytes(buffer, n);  // Echo back data
+                sleep(10);
+            }
+            std::cout << "receive from client: " << buffer << std:: endl;
+        }
+        catch (Poco::Exception& exc)
+        {
+            std::cerr << "Connection error: " << exc.displayText() << std::endl;
+        }
+    }
+};
+
+// Factory for creating instances of MyTCPConnection
+class MyTCPConnectionFactory : public Poco::Net::TCPServerConnectionFactory
+{
+public:
+    Poco::Net::TCPServerConnection* createConnection(const Poco::Net::StreamSocket& socket) override
+    {
+        return new MyTCPConnection(socket);
+    }
+};
+
+int main()
+{
+    // Create a ServerSocket on port 8080
+    Poco::Net::ServerSocket serverSocket(8080);
+
+    // Set server parameters (max queue size, max threads)
+    Poco::Net::TCPServerParams::Ptr pParams = new Poco::Net::TCPServerParams;
+    pParams->setMaxQueued(100);  // Max number of queued connections
+    pParams->setMaxThreads(4);   // Max number of worker threads
+
+    // Create a TCP server with the custom connection factory and server socket
+    Poco::Net::TCPServer tcpServer(new MyTCPConnectionFactory(), serverSocket, pParams);
+
+    // Start the server
+    tcpServer.start();
+    std::cout << "Server is running on port 8080..." << std::endl;
+
+    // Keep the server running indefinitely
+    std::cin.get();  // Wait for user input before stopping the server
+
+    // Stop the server
+    tcpServer.stop();
+    return 0;
+}
+```
