@@ -173,3 +173,17 @@ However, there are significant differences and enhancements with WebSockets over
 
     - WebSocket: Primarily used in client-server models, initiated by browsers using HTTP upgrade.
     - Regular Socket: More general-purpose, used in various communication contexts like peer-to-peer, but without automatic integration with web technologies.
+
+ **6. Differences between HTTP and WebSocket Connection**
+ 
+6.1:
+- WebSocket is a bidirectional communication protocol that can send the data from the client to the server or from the server to the client by reusing the established connection channel. The connection is kept alive until terminated by either the client or the server.
+- The HTTP protocol is a unidirectional protocol that works on top of TCP protocol which is a connection-oriented transport layer protocol, we can create the connection by using HTTP request methods after getting the response HTTP connection get closed.
+
+6.2:
+- Almost all the real-time applications like (trading, monitoring, notification) services use WebSocket to receive the data on a single communication channel.
+- Simple RESTful application uses HTTP protocol which is stateless.
+
+6.3:
+- All the frequently updated applications used WebSocket because it is faster than HTTP Connection.
+- It is used when we do not want to retain a connection for a particular amount of time or reuse the connection for transmitting data; An HTTP connection is slower than WebSockets.
