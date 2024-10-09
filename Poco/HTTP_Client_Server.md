@@ -1,14 +1,13 @@
 The HTTPServer Framework:
 
-1. POCO contains a ready-to-use HTTP Server framework:
-
+**1. POCO contains a ready-to-use HTTP Server framework:**
  - multithreaded
  - HTTP 1.0/1.1
  - authentication support
  - cookie support
  - HTTPS by using the NetSSL library
 
-2. HTTPServer:
+**2. HTTPServer:**
 
 configurable multi-threading:
  - maximum number of threads
@@ -19,22 +18,23 @@ similar to TCPServer:
  - expects a HTTPRequestHandlerFactory
  - which creates HTTPRequestHandler based on the URI
 
-3. HTTPRequestHandlerFactory:
+**3. HTTPRequestHandlerFactory:**
 
  - manages all known HTTPRequestHandlers
  - sole purpose is to decide which request handler will answer a request
  - can be used to check cookies, authentication info but this is mostly done by the request handlers
 
-4. HTTPServerRequest:
+**4. HTTPServerRequest:**
 
 created by the server
+
 passed as parameter to the HTTPRequestHandler/-Factory
  - contains URI
  - cookies
  - authentification information
  - HTML form data
 
-5. HTTPServerResponse:
+**5. HTTPServerResponse:**
 
 created by the server but initialized by the request handler:
  - set cookies
@@ -51,7 +51,7 @@ created by the server but initialized by the request handler:
  - if required, write data content to the returned stream
  - send() must be invoked exactly once!
 
-6. HTTP Client:
+**6. HTTP Client:**
 
 - Poco::Net::HTTPClientSession
 - allows you set GET/POST
@@ -60,7 +60,7 @@ created by the server but initialized by the request handler:
 
 if you only want to download something
 
-7. HTTPStreamFactory:
+**7. HTTPStreamFactory:**
 
  - must register the factory at the Poco::URIStreamOpener
   - Poco::Net::HTTPStreamFactory::registerFactory();
