@@ -70,7 +70,7 @@ if you only want to download something
   - StreamCopier::copyStream(*pStr.get(), std::cout);
 
 
-
+------------------------------------------------
 - URI Parsing: Poco::URI is used to parse the URL.
 - HTTPClientSession: Manages the connection to the server (hostname and port).
 - HTTPRequest: Sends an HTTP request (GET in this case).
