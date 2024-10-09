@@ -1,3 +1,81 @@
+The HTTPServer Framework:
+
+1. POCO contains a ready-to-use HTTP Server framework:
+
+ - multithreaded
+ - HTTP 1.0/1.1
+ - authentication support
+ - cookie support
+ - HTTPS by using the NetSSL library
+
+2. HTTPServer:
+
+configurable multi-threading:
+ - maximum number of threads
+ - uses thread pool
+ - queue size for pending connections
+
+similar to TCPServer:
+ - expects a HTTPRequestHandlerFactory
+ - which creates HTTPRequestHandler based on the URI
+
+3. HTTPRequestHandlerFactory:
+
+ - manages all known HTTPRequestHandlers
+ - sole purpose is to decide which request handler will answer a request
+ - can be used to check cookies, authentication info but this is mostly done by the request handlers
+
+4. HTTPServerRequest:
+
+created by the server
+passed as parameter to the HTTPRequestHandler/-Factory
+ - contains URI
+ - cookies
+ - authentification information
+ - HTML form data
+
+5. HTTPServerResponse:
+
+created by the server but initialized by the request handler:
+ - set cookies
+ - set content type of the answer response.setContentType("text/html");
+ - either set the length of the content or use chunked transfer encoding
+  - response.setContentLength(1024);
+  - response.setChunkedTransferEncoding(true); 
+
+ - set response type:
+  - response.setStatus[AndReason](HTTPResponse::HTTP_OK); // default
+  - response.setStatus[AndReason](HTTPResponse::HTTP_UNAUTHORIZED)
+ - after response is fully configured, send the header
+  - std::ostream& out = response.send();
+ - if required, write data content to the returned stream
+ - send() must be invoked exactly once!
+
+6. HTTP Client:
+
+- Poco::Net::HTTPClientSession
+- allows you set GET/POST
+- authentication information
+- Poco:Net::HTTPStreamFactory and Poco::StreamCopier
+
+if you only want to download something
+
+7. HTTPStreamFactory:
+
+ - must register the factory at the Poco::URIStreamOpener
+  - Poco::Net::HTTPStreamFactory::registerFactory();
+ - allows to open all http URIs with a one liner
+  - std::auto_ptr<std::istream>
+  - pStr(URIStreamOpener::defaultOpener().open(uri));
+  - StreamCopier::copyStream(*pStr.get(), std::cout);
+
+- URI Parsing: Poco::URI is used to parse the URL.
+- HTTPClientSession: Manages the connection to the server (hostname and port).
+- HTTPRequest: Sends an HTTP request (GET in this case).
+- HTTPResponse: Receives the HTTP response and handles the status code, headers, etc.
+- StreamCopier: Copies the response body (in this case, a simple JSON) to standard output.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 **1. What is HTTP?**
 
 HTTP (HyperText Transfer Protocol) is the foundation of data communication on the World Wide Web. It defines how messages are formatted and transmitted, and how web servers and browsers should respond to various requests. It is an application-layer protocol used for transmitting hypermedia (like HTML) documents, enabling users to interact with websites.
